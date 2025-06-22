@@ -1,0 +1,11 @@
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.AssemblyInfoInputs.cache
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.AssemblyInfo.cs
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.csproj.CoreCompileInputs.cache
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\bin\Debug\net9.0\LoanEvaluatorApp.Core.deps.json
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\bin\Debug\net9.0\LoanEvaluatorApp.Core.dll
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\bin\Debug\net9.0\LoanEvaluatorApp.Core.pdb
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.dll
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\refint\LoanEvaluatorApp.Core.dll
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\LoanEvaluatorApp.Core.pdb
+C:\Users\SAMSUNG\Desktop\مقاييس البرمجية\LoanEvaluatorApp.Core\obj\Debug\net9.0\ref\LoanEvaluatorApp.Core.dll

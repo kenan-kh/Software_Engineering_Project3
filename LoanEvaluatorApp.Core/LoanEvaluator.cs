@@ -1,72 +1,52 @@
 namespace LoanApp
 {
-public class LoanEvaluator
-{
-      private bool is_Has_Job_And_CridetScore_Gt700_And_Dependents_IsZero(bool hasJob,int creditScore,int dependents){  
-        return hasJob && creditScore>=700 && dependents == 0;
-      }
+    public class LoanEvaluator
+    {
+        // شروط الأهلية المباشرة
+        private bool MeetsStrictEligibility(bool hasJob, int creditScore, int dependents) =>
+            hasJob && creditScore >= 700 && dependents == 0;
 
-      private bool is_Has_Job_And_CridetScore_Gt700_And_Dependents_IsTwoOrLower(bool hasJob,int creditScore,int dependents){
-        return hasJob && creditScore>=700 && dependents >= 2;
-      }
+        private bool MeetsHighScoreWithoutJob(bool hasJob, int creditScore, int income, bool ownsHouse) =>
+            !hasJob && creditScore >= 750 && income > 5000 && ownsHouse;
 
-      private bool is_Has_Job_And_CridetScore_Gt600_And_OwnHouse(bool hasJob,int creditScore,bool ownHouse) {
-        return hasJob && creditScore>=600 && ownHouse;
-      }
+        // شروط المراجعة اليدوية
+        private bool MeetsModerateJobAndScore(bool hasJob, int creditScore, bool ownsHouse) =>
+            hasJob && creditScore >= 600 && ownsHouse;
 
-      private bool is_Not_Has_Job_And_CridetScore_Gt750_And_Income_Gt5000_And_OwnHouse(bool hasJob,int creditScore,int income,bool ownHouse){
-        return  !hasJob && creditScore>=750 && income > 5000 && ownHouse;
-      }
+        private bool MeetsHighScoreWithDependents(bool hasJob, int creditScore, int dependents) =>
+            hasJob && creditScore >= 700 && dependents >= 2;
 
-      private bool is_Not_Has_Job_And_CridetScore_Gt650_And_Dependents_IsZero(bool hasJob,int creditScore,int dependents) {
-        return !hasJob && creditScore>=650 && dependents == 0;
-      }
+        private bool MeetsLowScoreWithoutJob(bool hasJob, int creditScore, int dependents) =>
+            !hasJob && creditScore >= 650 && dependents == 0;
 
-      private bool isIncomeGreaterThanOrEqualTo2000(int income) => income >= 2000;
+        // شرط الدخل الأساسي
+        private bool HasMinimumIncome(int income) => income >= 2000;
 
-      public bool isEligible (bool hasJob,int creditScore,int income,int dependents,bool ownHouse)
-      {
-        if(is_Has_Job_And_CridetScore_Gt700_And_Dependents_IsZero(hasJob,creditScore,dependents)){
-          return true;
+        private bool IsDirectlyEligible(bool hasJob, int creditScore, int income, int dependents, bool ownsHouse)
+        {
+            return MeetsStrictEligibility(hasJob, creditScore, dependents)
+                || MeetsHighScoreWithoutJob(hasJob, creditScore, income, ownsHouse);
         }
 
-        if( is_Not_Has_Job_And_CridetScore_Gt750_And_Income_Gt5000_And_OwnHouse(hasJob,creditScore,income,ownHouse)){
-          return true;
+        private bool NeedsManualReview(bool hasJob, int creditScore, int dependents, bool ownsHouse)
+        {
+            return MeetsModerateJobAndScore(hasJob, creditScore, ownsHouse)
+                || MeetsHighScoreWithDependents(hasJob, creditScore, dependents)
+                || MeetsLowScoreWithoutJob(hasJob, creditScore, dependents);
         }
 
-        return false;
-      }
+        public string GetLoanEligibility(int income, bool hasJob, int creditScore, int dependents, bool ownsHouse)
+        {
+            if (!HasMinimumIncome(income))
+                return "Not Eligible";
 
-      public bool isReviewManualy (bool hasJob,int creditScore,int dependents,bool ownHouse)
-      {
-        if(is_Has_Job_And_CridetScore_Gt600_And_OwnHouse(hasJob,creditScore,ownHouse)){
-          return true;
-        }
+            if (IsDirectlyEligible(hasJob, creditScore, income, dependents, ownsHouse))
+                return "Eligible";
 
-        if( is_Has_Job_And_CridetScore_Gt700_And_Dependents_IsTwoOrLower(hasJob,creditScore,dependents)){
-          return true;
-        }
+            if (NeedsManualReview(hasJob, creditScore, dependents, ownsHouse))
+                return "Review Manually";
 
-        if(is_Not_Has_Job_And_CridetScore_Gt650_And_Dependents_IsZero(hasJob,creditScore,dependents)){
-          return true;
+            return "Not Eligible";
         }
-
-        return false;
-      }
-
-      public string GetLoanEligibility(int income, bool hasJob, int creditScore, int dependents, bool ownsHouse)
-      {
-        if(!isIncomeGreaterThanOrEqualTo2000(income)){
-          return "Not Eligible";
-        }
-        else if (isEligible(hasJob,creditScore,income,dependents,ownsHouse)){
-          return "Eligible";
-        }
-        else if (isReviewManualy(hasJob,creditScore,dependents,ownsHouse)){
-          return "Review Manually";
-        }else{
-          return "Not Eligible";
-        }
-      }
-   }
+    }
 }
